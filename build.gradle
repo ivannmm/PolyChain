@@ -1,0 +1,49 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.github.johnrengelman:shadow:8.1.1'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0-rc2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.0-rc2'
+    implementation 'org.json:json:20230227'
+    implementation 'com.google.guava:guava:31.1-jre'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveFileName = "PolyChain.jar"
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes "Main-Class": "org.example.Main"
+    }
+}
