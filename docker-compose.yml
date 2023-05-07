@@ -1,0 +1,40 @@
+version: "3"
+services:
+  node1:
+    image: polychain_test
+    container_name: node1
+    command: java -jar /app/PolyChain.jar
+    ports:
+      - "8081:8081"
+    environment:
+      PORT: 8081
+      RECEIVERS: http://172.17.0.1:8082,http://172.17.0.1:8083
+      MASTER: false
+      STRATEGY: rand
+
+  node2:
+    image: polychain_test
+    container_name: node2
+    command: java -jar /app/PolyChain.jar
+    ports:
+      - "8082:8082"
+    environment:
+      PORT: 8082
+      RECEIVERS: http://172.17.0.1:8081,http://172.17.0.1:8083
+      MASTER: false
+      STRATEGY: fib
+
+  node3:
+    image: polychain_test
+    container_name: node3
+    command: java -jar /app/PolyChain.jar
+    ports:
+      - "8083:8083"
+    environment:
+      PORT: 8083
+      RECEIVERS: http://172.17.0.1:8081,http://172.17.0.1:8082
+      MASTER: true
+      STRATEGY: inc
+    depends_on:
+      - node1
+      - node2
