@@ -1,5 +1,6 @@
 package org.example.polychain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.hash.Hashing;
 import lombok.*;
@@ -43,15 +44,17 @@ public class PolyBlock {
     @JsonProperty
     private String hash;
 
+    @JsonIgnore
     private NonceStrategy nonceStrategy;
 
     public PolyBlock() {}
 
-    public PolyBlock(int index, String prevHash, String data) {
+    public PolyBlock(int index, String prevHash, String data, NonceStrategy nonceStrategy) {
         this.index = index;
         this.prevHash = prevHash;
         this.data = data;
         this.nonce = 0;
+        this.nonceStrategy = nonceStrategy;
         this.hash = calculateHash();
     }
 

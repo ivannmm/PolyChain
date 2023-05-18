@@ -37,7 +37,7 @@ public class PolyChain {
 
         this.chain = new ArrayList<>();
         if (isGenesisBlock) {
-            PolyBlock genesisBlock = generateGenesisBlock();
+            PolyBlock genesisBlock = generateGenesisBlock(nonceStrategy);
             addBlock(genesisBlock, true);
         } else
             reload();
@@ -133,8 +133,8 @@ public class PolyChain {
 
 //    public void validateChain()
 
-    static PolyBlock generateGenesisBlock() {
-        return new PolyBlock(PolyBlock.upIndex(), "0", "First block PolyCryptocurrency");
+    static PolyBlock generateGenesisBlock(NonceStrategy nonceStrategy) {
+        return new PolyBlock(PolyBlock.upIndex(), "0", "First block PolyCryptocurrency", nonceStrategy);
     }
 
     static HttpRequest buildRequest(String receiver, PolyBlock polyBlock) {

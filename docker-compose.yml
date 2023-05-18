@@ -1,7 +1,7 @@
 version: "3"
 services:
   node1:
-    image: polychain_test
+    image: fierusoul/polychain_test
     container_name: node1
     command: java -jar /app/PolyChain.jar
     ports:
@@ -13,7 +13,7 @@ services:
       STRATEGY: rand
 
   node2:
-    image: polychain_test
+    image: fierusoul/polychain_test
     container_name: node2
     command: java -jar /app/PolyChain.jar
     ports:
@@ -25,7 +25,7 @@ services:
       STRATEGY: fib
 
   node3:
-    image: polychain_test
+    image: fierusoul/polychain_test
     container_name: node3
     command: java -jar /app/PolyChain.jar
     ports:

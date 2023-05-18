@@ -22,7 +22,7 @@ public class Generator implements Runnable {
                     PolyBlock lastBlock = polyChain.getLastBlock();
                     int newIndex = (lastBlock == null) ? 0 : PolyBlock.upIndex();
                     String prevHash = (lastBlock == null) ? "0" : lastBlock.getHash();
-                    PolyBlock block = new PolyBlock(newIndex, prevHash, generateData());
+                    PolyBlock block = new PolyBlock(newIndex, prevHash, generateData(), polyChain.getNonceStrategy());
                     polyChain.addBlock(block, true);
                 }
                 Thread.sleep(10000 + new Random().nextInt(20000));
